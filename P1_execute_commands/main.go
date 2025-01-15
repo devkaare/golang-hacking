@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	command := "date3"
+	command := "date"
 
 	cmd_obj := exec.Command(command)
 	cmd_obj.Stdout = os.Stdout
