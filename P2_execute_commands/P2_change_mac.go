@@ -25,7 +25,7 @@ func executeCommand(command string, args_arr []string) (err error) {
 
 func main() {
 	iface := flag.String("iface", "", "Interface for which you want to change the MAC")
-	newMac := flag.String("iface", "", "provide the new mac address")
+	newMac := flag.String("newMac", "", "provide the new mac address")
 
 	flag.Parse()
 
