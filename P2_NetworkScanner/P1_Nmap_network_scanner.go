@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	targetIP := "192.168.0.1/24"
+	targetIP := "192.168.10.191/24"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
 
@@ -38,7 +38,7 @@ func main() {
 			continue
 		}
 
-		fmt.Printf("IP: %q", host.Addresses[0])
+		fmt.Printf("IP: %q\n", host.Addresses[0])
 		if len(host.Addresses) > 1 {
 			fmt.Printf("MAC: %s\n", host.Addresses[1])
 		}
