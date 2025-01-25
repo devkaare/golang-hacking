@@ -25,7 +25,7 @@ func DisplayError(err error) {
 
 func options() {
 	fmt.Println("\t[1] ExecuteCommands")
-	fmt.Println("\t[2] ExecuteCommands")
+	fmt.Println("\t[2] Move in File system")
 	fmt.Println("\t[99] Exit")
 	fmt.Println()
 }
