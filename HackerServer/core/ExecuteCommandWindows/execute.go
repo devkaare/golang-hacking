@@ -10,10 +10,17 @@ import (
 
 type Command struct {
 	CmdOutput string
-	CmdErr    string
+	CmdError  string
 }
 
 func ExecuteCommandRemotelyWindows(connection net.Conn) (err error) {
+
+	// send command from server
+	// execute command remotely
+	// receive back results or error
+	// dir pwd date
+	// stop
+	// special condition will be "stop"
 
 	reader := bufio.NewReader(os.Stdin)
 
@@ -21,7 +28,7 @@ func ExecuteCommandRemotelyWindows(connection net.Conn) (err error) {
 
 	for commandloop {
 
-		fmt.Printf(">> ")
+		fmt.Print(">> ")
 		command, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println(err)
@@ -31,6 +38,7 @@ func ExecuteCommandRemotelyWindows(connection net.Conn) (err error) {
 		connection.Write([]byte(command))
 		if command == "stop\n" {
 			commandloop = false
+			continue
 		}
 
 		cmdStruct := &Command{}
@@ -43,10 +51,11 @@ func ExecuteCommandRemotelyWindows(connection net.Conn) (err error) {
 		}
 
 		fmt.Println(cmdStruct.CmdOutput)
-		if cmdStruct.CmdErr != "" {
-			fmt.Println(cmdStruct.CmdErr)
+		if cmdStruct.CmdError != "" {
+			fmt.Println(cmdStruct.CmdError)
 		}
-	}
 
+	}
 	return
 }
+

