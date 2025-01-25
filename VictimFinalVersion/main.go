@@ -1,12 +1,17 @@
 package main
 
 import (
-	"bufio"
+	"encoding/gob"
 	"fmt"
 	"golang-hacking/VictimFinalVersion/core/handleConnection"
 	"log"
-	"strings"
 )
+
+type Data struct {
+	Name string
+	ID   int
+	Age  float32
+}
 
 func main() {
 	ServerIP := "192.168.10.191"
@@ -19,12 +24,18 @@ func main() {
 	defer connection.Close()
 	fmt.Println("[+] Connection established with Server :", connection.RemoteAddr().String())
 
-	reader := bufio.NewReader(connection)
+	decoder := gob.NewDecoder(connection)
 
-	dataReceived, err := reader.ReadString('\n')
+	data := &Data{}
+
+	err = decoder.Decode(data)
+
 	if err != nil {
 		log.Fatal(err)
+	} else {
+		fmt.Println("[+] Successfully decoded data")
+		fmt.Println(data.Name)
+		fmt.Println(data.ID)
+		fmt.Println(data.Age)
 	}
-	data := strings.TrimSuffix(dataReceived, "\n")
-	fmt.Println(data)
 }
