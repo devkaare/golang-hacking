@@ -21,6 +21,7 @@ func NavigateFilesystem(connection net.Conn) (err error) {
 	fmt.Println("[+] ", nbyte, " was written")
 
 	CommandReader := bufio.NewReader(connection)
+
 	user_command_raw, err := CommandReader.ReadString('\n')
 	if err != nil {
 		fmt.Println("[+] Unable to read command ")
