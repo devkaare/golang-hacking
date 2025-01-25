@@ -35,7 +35,7 @@ func main() {
 	} else {
 		fmt.Println("[+] Successfully decoded data")
 		fmt.Println(data.Name)
-		fmt.Println(data.ID)
 		fmt.Println(data.Age)
+		fmt.Println(data.ID)
 	}
 }
