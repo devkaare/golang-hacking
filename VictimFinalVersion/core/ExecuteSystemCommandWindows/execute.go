@@ -36,7 +36,7 @@ func ExecCommandWindows(connection net.Conn) (err error) {
 			var cmd_instance *exec.Cmd
 
 			if runtime.GOOS == "windows" {
-				cmd_instance = exec.Command("powershell.exe", "/C", user_input)
+				cmd_instance = exec.Command(user_input)
 			} else {
 				cmd_instance = exec.Command(user_input)
 			}
