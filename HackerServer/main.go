@@ -24,8 +24,9 @@ func DisplayError(err error) {
 }
 
 func options() {
-	fmt.Println("[1] ExecuteCommands")
-	fmt.Println("[99] Exit")
+	fmt.Println("\t[1] ExecuteCommands")
+	fmt.Println("\t[2] ExecuteCommands")
+	fmt.Println("\t[99] Exit")
 	fmt.Println()
 }
 
