@@ -49,7 +49,7 @@ func main() {
 		switch {
 		case user_input == "1":
 			fmt.Println("[+] Executing Commands on windows")
-			err := ExecuteSystemCommandWindows.ExecCommandWindows(connection)
+			err := ExecuteSystemCommandWindows.ExecuteCommandWindows(connection)
 			DisplayError(err)
 		case user_input == "99":
 			fmt.Println("[-] Exiting the windows program")
