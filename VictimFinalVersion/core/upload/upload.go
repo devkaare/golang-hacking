@@ -77,3 +77,7 @@ func Upload2Hacker(connection net.Conn) (err error) {
 
 	return
 }
+
+func UploadFolder2Hacker(connection net.Conn) (err error) {
+	return
+}

