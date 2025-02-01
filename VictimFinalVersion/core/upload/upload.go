@@ -62,7 +62,7 @@ func AddFilesToZip(ZipWriter *zip.Writer, basePath string, baseInZip string) {
 			}
 			_, err = f.Write(data)
 		} else if file.IsDir() {
-			newBase := basePath + "/" + file.Name() + "/"
+			newBase := basePath + file.Name() + "/"
 			fmt.Println("Adding Subdir: ", file.Name())
 			fmt.Println("Adding Subdir: ", newBase)
 
