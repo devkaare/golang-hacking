@@ -4,6 +4,7 @@ set files='https://www.homedora.com/cdn/shop/files/UrlaAngel04Cream_8_1_1.jpg','
 
 for %%i in (%files%) do (
 	set fileName="'%%i'+(Split-Path -Path $_ -Leaf)"
-	powershell "(new-object System.Net.WebClient).DownloadFile($_,$fileName);Invoke-Item $fileName;"
+	powershell.exe -Command "(new-object System.Net.WebClient).DownloadFile($_,$fileName);"
+	start %fileName% // Invoke-Item $fileName;
 )
 
