@@ -6,7 +6,7 @@ set files="https://www.homedora.com/cdn/shop/files/UrlaAngel04Cream_8_1_1.jpg" "
 for %%i in (%files%) do (
     set "fileName=%TEMP%\%%~nxi"
     powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%%i', '!fileName!');"
-    start '!fileName!'
+    start !fileName!
 )
 
 endlocal
