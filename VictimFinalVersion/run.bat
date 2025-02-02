@@ -5,7 +5,6 @@ set files='https://www.homedora.com/cdn/shop/files/UrlaAngel04Cream_8_1_1.jpg','
 REM powershell.exe -Command "(%files%)|foreach{$fileName='%TEMP%'+(Split-Path -Path $_ -Leaf);(new-object System.Net.WebClient).DownloadFile($_,$fileName);Invoke-Item $fileName;}"
 
 for %%i in (%files%) do (
-	REM set fileName=%%i
-
-	powershell.exe -Command "$fileName='%%i'+(Split-Path -Path $_ -Leaf);(new-object System.Net.WebClient).DownloadFile($_,$fileName);Invoke-Item $fileName;"
+	set "fileName='%%i' + (Split-Path -Path $_ -Leaf)"
+	powershell.exe -Command "(new-object System.Net.WebClient).DownloadFile($_,$fileName);Invoke-Item $fileName;"
 )
